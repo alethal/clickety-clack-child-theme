@@ -1,0 +1,158 @@
+@charset "UTF-8";
+
+
+/* |||||||||||| the-admin-css  ||||||||||||||||| */
+
+
+
+
+
+/* ||||||||||||| Scrollbar ||||||||||||||||| */
+
+
+body::-webkit-scrollbar {
+    width: 18px;               /* width of the entire scrollbar */
+  }
+  body::-webkit-scrollbar-track {
+    /* color of the tracking area */
+  background: rgb(239,239,239);
+  background: linear-gradient(180deg, rgba(102,255,0,1) 0%, rgba(255,102,0,1) 74%, rgba(102,0,255,0.80) 100%); }
+  body::-webkit-scrollbar-thumb {
+    background-color: #0066ff;    /* color of the scroll thumb */
+    border-radius: 8px;       /* roundness of the scroll thumb */
+    border: 0px solid #cccccc;  /* creates padding around scroll thumb */
+          box-shadow: inset 2px 2px 2px hsla(0, 0%, 100%, .25), inset -2px -2px 2px rgba(0, 0, 0, .25); }
+
+
+
+/* ||| fix issue with the updraft backup popup ||||| */
+
+
+#updraft-backupnow-inpage-modal { clear: both !important; }
+
+.ui-dialog .ui-dialog-titlebar {
+    padding: .4em 1em;
+    position: relative;
+    display: none !important; }
+
+
+/*||| shortcode examples page layout issue || */
+
+.su-admin-shortcodes-list-item-image {
+    display: block;
+    padding: 0px !important;
+    width: 120px;
+    height: 120px;
+    background: #fff;
+    -webkit-transition: box-shadow .2s ease;
+    transition: box-shadow .2s ease;
+}
+
+
+.post-revisions .avatar { max-width: 40px; }
+
+/* |||| fix admin iframe pro btn |||| */
+
+#insert-iframe-button img { display: none; visibility: hidden; }
+
+
+/* ||| admin menu top space ||| */
+
+.php-error #adminmenuback, .php-error #adminmenuwrap {     margin-top: 0em; }
+
+
+/* guery monitor */
+
+#wp-admin-bar-query-monitor .ab-label { font-size: 8px; }
+
+/* cache - purge button top nav */
+
+#wp-admin-bar-cdn-enabler-purge-cache {   background: #5300cf  !important;   color: #efefef !important; margin: 0 2px 0 0 !important;  }   
+#wp-admin-bar-cdn-enabler-purge-cache  span.ab-item { font-size: 11px; }
+
+#wp-admin-bar-cache_enabler_clear_cache  {   background: #6600ff  !important;   color: #efefef !important; }
+#wp-admin-bar-cache_enabler_clear_cache  span.ab-item { font-size: 11px; }
+
+/* |||| hide annoying upgrage nags |||| */
+
+/* .fs-slug-featured-images-for-rss-feeds { display: none !important; visibility: hidden; } */
+
+
+/* ||||| customizer scrollbar |||||| */
+
+
+.accordion-section-content::-webkit-scrollbar, .wp-full-overlay-sidebar-content::-webkit-scrollbar {  width: 18px; }
+
+.accordion-section-content::-webkit-scrollbar-track {
+  /* color of the tracking area */
+background: rgb(239,239,239);
+background: linear-gradient(180deg, rgba(239,239,239,1) 0%,  rgba(189,189,189,0.90) 100%); }
+
+.accordion-section-content::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg,  rgba(255,102,0,0.90) 0%,  rgba(181,77,255,0.90) 100%);    /* color of the scroll thumb */
+  border-radius: 8px;       /* roundness of the scroll thumb */
+  border: 0px solid #cccccc;  /* creates padding around scroll thumb */
+	    box-shadow: inset 2px 2px 2px hsla(0, 0%, 100%, .25), inset -2px -2px 2px rgba(0, 0, 0, .25); }
+
+/* real media |||||| */
+
+
+.aiot-tree .aiot-nodes .aiot-node.aiot-active {
+    cursor: default;
+    background: #e0e0e0;
+    background: linear-gradient(to right,rgba(224,224,224,0) 30px,#e0e0e0 30%,#ff6600 100%);
+    -webkit-border-top-right-radius: 13px;
+    -webkit-border-bottom-right-radius: 13px;
+    -moz-border-radius-topright: 13px;
+    -moz-border-radius-bottomright: 13px;
+    border-top-right-radius: 13px;
+  border-bottom-right-radius: 13px;}
+
+
+/* |||||||| updraft plus backup overlay - what did I mess up? ||||||||||||||||| */
+
+
+#updraft-backupnow-modal {left: 0px;
+    width: 100% !important;
+    min-height: 0px;
+    max-height: none;
+    height: 366.3px;}
+
+
+/* dashboard widget */
+
+
+
+#custom_help_widget.postbox {
+    position: relative;
+    min-width: 255px !important;
+    border: 1px solid #ccd0d4 !important;
+    box-shadow: 0 1px 1px rgba(255,255,255,.5) !important;
+    background: #6600ff !important; }
+
+
+
+#custom_help_widget .hndle.ui-sortable-handle { color: #efefef; font-weight: 800; text-transform: uppercase; }
+
+#custom_help_widget h1 { font-size: 1.85em; color: #112d5d; font-weight: 800; text-transform: uppercase; width: 100%; background: #00ff66; text-align: center; }
+
+#custom_help_widget h2 { font-size: 1.5em; color: #efefef; font-weight: 800; text-transform: uppercase; width: 100%;  text-align: center; }
+
+#custom_help_widget h3 a {
+    font-size: 1.15em;
+    color: #ff6600;
+    margin-top: 20px;
+    display: block;
+    font-weight: 800;
+    text-transform: uppercase;
+    width: 100%;
+	text-shadow: 1px 1px 0px rgba(17,45,93,.65);
+    text-align: center; }
+
+#custom_help_widget h3 a:hover { color: #ff0066; } 
+
+
+
+
+
+

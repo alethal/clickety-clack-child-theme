@@ -1,0 +1,98 @@
+@charset "UTF-8";
+
+/* |||||||||||| EDITS TO - THEME EDITOR PRO / CODEMIRROR  |||||||||||||||||*/
+
+
+/* |||| make taller editor screen ||| */
+
+.CodeMirror.cm-s-neo { height: 900px !important; }
+
+/* ||||| this theme is currently activated! REMOVE  |||||*/
+
+.toplevel_page_theme_editor_theme .updated {
+  display: none;
+  visibility: hidden;
+    position: absolute;
+    top: 1px;
+    right: 0px;
+    width: 0%;
+    margin: 0px 0 0px;}
+
+/* |||||| since that currently activated. isremoved - move the edit choices up |||| */
+
+.toplevel_page_theme_editor_theme .fileedit-sub .alignright {
+    padding-top: 10px;
+    margin-top: -50px; }
+
+
+/* ||||||||| remove buy pro button ||||||||||||||*/
+
+body.plugins_page_theme_editor_plugin .wrap h2 a.button.button-primary:first-child, body.toplevel_page_theme_editor_theme .wrap h2 a.button.button-primary:first-child { visibility: hidden; display: none; } 
+
+/* |||| rate us ||||*/
+
+
+.wters .r_wters {
+display: none; visibility: hidden; height: 0px; padding: 0px; margin: 0px; line-height: 0px; }
+
+
+/* ||||||||| font size ||||||||||||| */
+
+
+body.toplevel_page_theme_editor_theme .CodeMirror {
+    font-family: "Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
+    font-size: 14px;
+    line-height: 1.35em;
+    min-width: 600px; }
+
+
+
+/* |||||||||||| make editing window taller  |||||||||||||||||*/
+
+
+.toplevel_page_theme_editor_theme .CodeMirror.cm-s-mbo { 
+  height: calc(100vh - 15vh)  !important; 
+}
+
+
+.toplevel_page_theme_editor_theme .postbox .inside h2, .toplevel_page_theme_editor_theme .wrap [class$=icon32]+h2, .toplevel_page_theme_editor_theme .wrap h1, .toplevel_page_theme_editor_theme .wrap>h2:first-child {
+    font-size: 16px;
+    font-weight: 400;
+    margin: 0;
+    padding: 9px 0 4px 0;
+    line-height: 1;
+}
+
+.toplevel_page_theme_editor_theme .fileedit-sub .alignleft {
+  padding-top: 25px; 
+}
+
+ .toplevel_page_theme_editor_theme .fileedit-sub .alignright {
+  padding-top: 10px; 
+}
+
+
+.toplevel_page_theme_editor_theme p.submit { 
+ position: absolute; top: 2vh; display: block;  z-index: 90; background: #efefef; background: rgba(255,0,102,.85);
+  padding: 5px; 
+-webkit-border-radius: 3px;
+-moz-border-radius: 3px;
+border-radius: 3px; 
+}
+
+/*
+.media-upload-form .notice, .media-upload-form div.error, .wrap .notice, .wrap div.error, .wrap div.updated {
+*/
+
+.toplevel_page_theme_editor_theme .updated { 
+  position: absolute;
+  top: 1px;
+  right: 20px;
+  width: 33%;
+  display: block; 
+  margin: 2px 0 5px;
+}
+
+.toplevel_page_theme_editor_theme .updated p { 
+    font-size: 10px; 
+}

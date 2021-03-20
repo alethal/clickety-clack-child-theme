@@ -1,0 +1,806 @@
+<?php
+/**
+ * Plugin Name:       projectsite_site_functionality
+ * Plugin URI:        http://shawneee.com
+ * Description:       Functionality to be reused on all sites
+ * Version:           1.0.0
+ * Author:            Shawneee.com
+ * Author URI:        http://shawneee.com
+ * License:           GPL-2.0+
+ * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
+ * Text Domain:       plugin-name
+ * Domain Path:       /languages
+ */
+
+
+  /*---------------------------------------\
+  turn off heartbeat - may be slowing down everything in admin
+  /---------------------------------------*/
+
+/* using plugin to slow
+  add_action( 'init', 'stop_heartbeat', 1 );
+  function stop_heartbeat() {
+  wp_deregister_script('heartbeat');
+  }
+  */
+
+
+
+    /*------------------------------------\
+      ADD ANALYTICS
+     \------------------------------------*/
+
+
+      add_action('wp_head','bumpbar_analytics', 20);
+      function bumpbar_analytics() {
+      ?>
+
+     <!-- Global site tag gtag.js - Google Analytics -->
+
+ <script async src="https://www.googletagmanager.com/gtag/js?id=UA-6552503-1"></script>
+ <script>
+   window.dataLayer = window.dataLayer || [];
+   function gtag(){dataLayer.push(arguments);}
+   gtag('js', new Date());
+
+   gtag('config', 'UA-6552503-1');
+ </script>
+
+      <?php
+      }
+
+
+      /*------------------------------------\
+      SET SIZE OF EXCERPTS
+      \------------------------------------*/
+
+
+      /**
+       * Filter the except length to 11 words.
+       *
+       * param int $length Excerpt length.
+       * return int (Maybe) modified excerpt length.
+       */
+       
+     /* function wpdocs_custom_excerpt_length( $length ) {
+          return 11;
+      }
+      add_filter( 'excerpt_length', 'wpdocs_custom_excerpt_length', 999 );
+*/
+
+
+      /*------------------------------------\
+       FAVICON FOR FRONT END
+      \------------------------------------*/
+
+
+        /* adding favicon stuff to header */
+        add_action('wp_head','projectsite_favicons', 20);
+        function projectsite_favicons() {
+        ?>
+
+        <!-- projectsite frontend favicons -->
+<link rel="apple-touch-icon-precomposed" sizes="57x57" href="/wp-content/themes/astra-child/favicon_package/apple-touch-icon-57x57.png" />
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/wp-content/themes/astra-child/favicon_package/apple-touch-icon-114x114.png" />
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/wp-content/themes/astra-child/favicon_package/apple-touch-icon-72x72.png" />
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/wp-content/themes/astra-child/favicon_package/apple-touch-icon-144x144.png" />
+<link rel="apple-touch-icon-precomposed" sizes="60x60" href="/wp-content/themes/astra-child/favicon_package/apple-touch-icon-60x60.png" />
+<link rel="apple-touch-icon-precomposed" sizes="120x120" href="/wp-content/themes/astra-child/favicon_package/apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon-precomposed" sizes="76x76" href="/wp-content/themes/astra-child/favicon_package/apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon-precomposed" sizes="152x152" href="/wp-content/themes/astra-child/favicon_package/apple-touch-icon-152x152.png" />
+<link rel="icon" type="image/png" href="/wp-content/themes/astra-child/favicon_package/favicon-196x196.png" sizes="196x196" />
+<link rel="icon" type="image/png" href="/wp-content/themes/astra-child/favicon_package/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/png" href="/wp-content/themes/astra-child/favicon_package/favicon-32x32.png" sizes="32x32" />
+<link rel="icon" type="image/png" href="/wp-content/themes/astra-child/favicon_package/favicon-16x16.png" sizes="16x16" />
+<link rel="icon" type="image/png" href="/wp-content/themes/astra-child/favicon_package/favicon-128.png" sizes="128x128" />
+<meta name="application-name" content="Project Site"/>
+<meta name="msapplication-TileColor" content="#FFFFFF" />
+<meta name="msapplication-TileImage" content="/wp-content/themes/astra-child/favicon_package/mstile-144x144.png" />
+<meta name="msapplication-square70x70logo" content="/wp-content/themes/astra-child/favicon_package/mstile-70x70.png" />
+<meta name="msapplication-square150x150logo" content="/wp-content/themes/astra-child/favicon_package/mstile-150x150.png" />
+<meta name="msapplication-wide310x150logo" content="/wp-content/themes/astra-child/favicon_package/mstile-310x150.png" />
+<meta name="msapplication-square310x310logo" content="/wp-content/themes/astra-child/favicon_package/mstile-310x310.png" />
+<meta name="msapplication-notification" content="frequency=30;polling-uri=https://notifications.buildmypinnedsite.com/?feed=http://projects.nakedsword.com/feed/&amp;id=1;polling-uri2=https://notifications.buildmypinnedsite.com/?feed=http://projects.nakedsword.com/feed/&amp;id=2;polling-uri3=https://notifications.buildmypinnedsite.com/?feed=http://projects.nakedsword.com/feed/&amp;id=3;polling-uri4=https://notifications.buildmypinnedsite.com/?feed=http://projects.nakedsword.com/feed/&amp;id=4;polling-uri5=https://notifications.buildmypinnedsite.com/?feed=http://projects.nakedsword.com/feed/&amp;id=5;cycle=1" />
+
+
+        <?php
+        }
+
+
+      /*------------------------------------\
+       FAVICON FOR ADMIN
+      \------------------------------------*/
+
+
+
+
+      function projectsitefavicon4admin() {
+      echo '<!-- admin favicon--><link rel="Shortcut Icon" type="image/x-icon" href="' . get_bloginfo('wpurl') . '/wp-content/themes/astra-child/favicon_package/admin_favicon.ico" />';
+      }
+      add_action( 'admin_head', 'projectsitefavicon4admin' );
+
+
+
+
+    /*------------------------------------\
+    	ADD CATEGORIES AND TAGS TO PAGES
+    \------------------------------------*/
+
+
+    function add_cats_and_tags_to_pages_definition() {
+        register_taxonomy_for_object_type('post_tag', 'page');
+        register_taxonomy_for_object_type('category', 'page');
+    }
+    add_action( 'init', 'add_cats_and_tags_to_pages_definition' );
+
+
+  /*---------------------------------------\
+  add categories to body class
+ \---------------------------------------*/
+
+  add_filter('body_class','add_category_to_single');
+    function add_category_to_single($classes) {
+      if (is_single() ) {
+        global $post;
+        foreach((get_the_category($post->ID)) as $category) {
+          // add category slug to the $classes array
+          $classes[] = $category->category_nicename;
+        }
+      }
+      // return the $classes array
+      return $classes;
+    }
+
+
+ /* add to pages */
+
+
+ add_filter('body_class','my_page_body_class');
+   function my_page_body_class($classes) {
+     if (is_page() ) {
+       global $page;
+       foreach((get_the_category($page->ID)) as $category) {
+         // add category slug to the $classes array
+         $classes[] = $category->category_nicename;
+       }
+     }
+     // return the $classes array
+     return $classes;
+   }
+
+
+
+     /*------------------------------------\
+     	ADD CATEGORIES TO IMAGES
+     \------------------------------------*/
+
+   /* https://code.tutsplus.com/articles/applying-categories-tags-and-custom-taxonomies-to-media-attachments--wp-32319 */
+
+   function wptp_add_categories_to_attachments() {
+       register_taxonomy_for_object_type( 'category', 'attachment' );
+   }
+   add_action( 'init' , 'wptp_add_categories_to_attachments' );
+
+   // apply tags to attachments
+   function wptp_add_tags_to_attachments() {
+       register_taxonomy_for_object_type( 'post_tag', 'attachment' );
+   }
+   add_action( 'init' , 'wptp_add_tags_to_attachments' );
+
+   // register new taxonomy which applies to attachments
+   function wptp_add_location_taxonomy() {
+       $labels = array(
+           'name'              => 'Locations',
+           'singular_name'     => 'Location',
+           'search_items'      => 'Search Locations',
+           'all_items'         => 'All Locations',
+           'parent_item'       => 'Parent Location',
+           'parent_item_colon' => 'Parent Location:',
+           'edit_item'         => 'Edit Location',
+           'update_item'       => 'Update Location',
+           'add_new_item'      => 'Add New Location',
+           'new_item_name'     => 'New Location Name',
+           'menu_name'         => 'Location',
+       );
+
+       $args = array(
+           'labels' => $labels,
+           'hierarchical' => true,
+           'query_var' => 'true',
+           'rewrite' => 'true',
+           'show_admin_column' => 'true',
+       );
+
+       register_taxonomy( 'location', 'attachment', $args );
+   }
+   add_action( 'init', 'wptp_add_location_taxonomy' );
+
+
+
+   /*------------------------------------\
+      adding excerpt to pages
+  \------------------------------------*/
+
+ add_post_type_support( 'page', 'excerpt' );
+
+
+
+ /*
+ function new_excerpt_more( $more ) {
+ 	return ' <a class="read-more" href="'. get_permalink( get_the_ID() ) . '">Read More</a>';
+ }
+ add_filter( 'excerpt_more', 'new_excerpt_more' );
+ */
+
+
+
+    /*------------------------------------\
+    FORCE NORMAL NON CURLY QUOTES
+    \------------------------------------*/
+ /*
+ Use normal quotes instead of curly quotes
+ If you have ever shared a code snippet on WordPress, you might have noted that by default, WP turns normal quotes to smart codes, which could break the code snippet you're about to publish.
+ */
+
+ remove_filter('the_content', 'wptexturize');
+
+
+
+
+
+
+
+ /*------------------------------------\
+     make gallery default to using medium size images
+    \------------------------------------*/
+
+ /* Register shortcode_atts_gallery filter callback */
+ add_filter( 'shortcode_atts_gallery', 'meks_gallery_atts', 10, 3 );
+
+ /* Change attributes of wp gallery to modify image sizes for your needs */
+ function meks_gallery_atts( $output, $pairs, $atts ) {
+
+ /* You can use these sizes:
+ - thumbnail
+ - medium
+ - large
+ - full
+ or, if your theme/plugin generate additional custom sizes you can use them as well
+ */
+
+ $output['size'] = 'medium'; //i.e. This will change all your gallery images to "medium" size
+
+ return $output;
+
+ }
+
+
+
+
+
+   /*------------------------------------\
+   	stop the p in all post types
+   \------------------------------------*/
+
+ // Prevent WP from adding <p> tags on all post types
+ /*function disable_wp_auto_p( $content ) {
+   remove_filter( 'the_content', 'wpautop' );
+   remove_filter( 'the_excerpt', 'wpautop' );
+   return $content;
+ }
+ add_filter( 'the_content', 'disable_wp_auto_p', 0 );*/
+
+
+   /*------------------------------------\
+   	MAKE BR WORK WHEN REST OF AUTOWPP IS OFF
+   \------------------------------------*/
+
+ /*function clear_br($content) {
+ return str_replace("<br/>","<br clear='none'/>", $content);
+ }
+ add_filter('the_content','clear_br');*/
+
+
+   /*------------------------------------\
+   	Exclude tag from tag list
+   \------------------------------------*/
+
+ function mytheme_filter_tags( $term_links ) {
+     $result = array();
+     $exclude_tags = array( 'some tag', 'another tag', 'third tag' );
+     foreach ( $term_links as $link ) {
+         foreach ( $exclude_tags as $tag ) {
+             if ( stripos( $link, $tag ) !== false ) continue 2;
+         }
+         $result[] = $link;
+     }
+     return $result;
+ }
+ add_filter( "term_links-post_tag", 'mytheme_filter_tags', 100, 1 );
+
+ // do loop stuff
+ echo get_the_tag_list('<p>Tags: ',', ','</p>');
+ // end loop stuff
+
+ remove_filter( "term_links-post_tag", 'mytheme_filter_tags', 100 );
+
+
+
+   /*------------------------------------\
+   	SET UP NO POST CATEGORY - try to make "internal" excluded
+   \------------------------------------*/
+
+
+
+/* exclude from blog  https://www.wpwhitesecurity.com/exclude-category-wordpress-blog/ */
+/*//////////////// WORKING VERSION /////////////////////////////////////////////*/
+
+function exclude_category($query) {
+if ( $query->is_home() ) {
+$query->set('cat', '-71');
+}
+return $query;
+}
+add_filter('pre_get_posts', 'exclude_category');
+
+
+
+
+
+ /*
+ function exclude_category_posts( $query ) {
+ if ( $query->is_home() && $query->is_main_query() ) {
+ $query->set( 'cat', '-71, -9737, -169, -170' );
+ }
+ }
+ add_action( 'pre_get_posts', 'exclude_category_posts' );
+ */
+
+ function exclude_category_posts( $query ) {
+ if ( $query->is_home() && $query->is_main_query() ) {
+ $query->set( 'cat', '-71' );
+ }
+ }
+ add_action( 'pre_get_posts', 'exclude_category_posts' );
+
+
+
+
+ /* exclude from search */
+ function wcs_exclude_category_search( $query ) {
+   if ( is_admin() || ! $query->is_main_query() )
+     return;
+
+   if ( $query->is_search ) {
+     $query->set( 'cat', '-71' );
+   }
+
+ }
+ add_action( 'pre_get_posts', 'wcs_exclude_category_search', 1 );
+
+
+/* exclude from date archives */
+
+function exclude_stuff($query) {
+if ( $query->is_date) {
+$query->set('cat', '-71');
+}
+return $query;
+}
+add_filter('pre_get_posts', 'exclude_stuff');
+
+/* custom archives */
+
+add_filter( 'getarchives_where', 'customarchives_where' );
+add_filter( 'getarchives_join', 'customarchives_join' );
+function customarchives_join( $x ) {
+global $wpdb;
+return $x . " INNER JOIN $wpdb->term_relationships ON ($wpdb->posts.ID = $wpdb->term_relationships.object_id) INNER JOIN $wpdb->term_taxonomy ON ($wpdb->term_relationships.term_taxonomy_id = $wpdb->term_taxonomy.term_taxonomy_id)";
+}
+function customarchives_where( $x ) {
+global $wpdb;
+$exclude = '71'; // category id to exclude
+return $x . " AND $wpdb->term_taxonomy.taxonomy = 'category' AND $wpdb->term_taxonomy.term_id NOT IN ($exclude)";
+}
+
+
+  /*------------------------------------\
+          UPLOAD SVG
+ \------------------------------------*/
+ /*
+ function cc_mime_types($mimes) {
+ $mimes['svg'] = 'image/svg+xml';
+ return $mimes;
+ }
+ add_filter('upload_mimes', 'cc_mime_types');
+ */
+ /*
+ svg files - you have to add <?xml version="1.0" encoding="utf-8"?> to the file for it to upload
+ */
+
+ /*------------------------------------\
+ UPLOAD / USE ANY FILE TYPE
+ \------------------------------------*/
+
+
+ /*
+ Enable WordPress to Upload Any File Type You Want
+ By default, WordPress only enables you to upload a very limited range of file types, including common media formats such as .png and .jpg. With this code, you’ll be able to force your installation to allow more types:
+
+ */
+
+ /*---------------------------------------\
+       SVG OK
+ /---------------------------------------*/
+/*
+ function cc_mime_types($mimes) {
+   $mimes['svg'] = 'image/svg+xml';
+   return $mimes;
+ }
+ add_filter('upload_mimes', 'cc_mime_types');
+*/
+
+ /*------------------------------------\
+ UPLOAD WEBP
+ \------------------------------------*/
+
+ /**
+  * Sets the extension and mime type for .webp files.
+  *
+  * @ param array  $wp_check_filetype_and_ext File data array containing 'ext', 'type', and
+  *                                          'proper_filename' keys.
+  * @ param string $file                      Full path to the file.
+  * @ param string $filename                  The name of the file (may differ from $file due to
+  *                                          $file being in a tmp directory).
+  * @ param array  $mimes                     Key is the file extension with value as the mime type.
+  */
+ add_filter( 'wp_check_filetype_and_ext', 'wpse_file_and_ext_webp', 10, 4 );
+ function wpse_file_and_ext_webp( $types, $file, $filename, $mimes ) {
+     if ( false !== strpos( $filename, '.webp' ) ) {
+         $types['ext'] = 'webp';
+         $types['type'] = 'image/webp';
+     }
+
+     return $types;
+ }
+
+ /**
+  * Adds webp filetype to allowed mimes
+  *
+  * @ see https://codex.wordpress.org/Plugin_API/Filter_Reference/upload_mimes
+  *
+  * @ param array $mimes Mime types keyed by the file extension regex corresponding to
+  *                     those types. 'swf' and 'exe' removed from full list. 'htm|html' also
+  *                     removed depending on '$user' capabilities.
+  *
+  * @ return array
+  */
+ add_filter( 'upload_mimes', 'wpse_mime_types_webp' );
+ function wpse_mime_types_webp( $mimes ) {
+     $mimes['webp'] = 'image/webp';
+
+   return $mimes;
+ }
+
+ /*
+
+ https://wordpress.stackexchange.com/questions/323221/allowing-webp-uploads
+
+ Sometimes the uploads are limited by your host. Try and define the ALLOW_UNFILTERED_UPLOADS constant that allows upload for every file type:
+
+ define( 'ALLOW_UNFILTERED_UPLOADS', true );
+ */
+
+
+
+  /*------------------------------------\
+  ADD CUSTOM WIDGETS TO DASHBOARD (ADMIN)
+  \------------------------------------*/
+
+ /*
+
+ You probably have seen widgets that numerous plugins and themes add in the WordPress dashboard. As a theme developer, you can add one yourself by pasting the following code:
+
+ */
+
+ add_action('wp_dashboard_setup', 'my_custom_dashboard_widgets');
+ function my_custom_dashboard_widgets() {
+ global $wp_meta_boxes;
+ wp_add_dashboard_widget('custom_widget_smp', 'Website Issues?', 'custom_dashboard_information');
+ }
+ function custom_dashboard_information() {
+ echo 'If you need help making changes to your site, you can always contact me via email at <a href="mailto:shawn@cubik.com">shawn@cubik.com</a>.';
+ }
+
+
+ /*------------------------------------\
+ FIX GRAVITARS - USE A BRANDED THING
+ \------------------------------------*/
+
+/*
+Have you seen the default mystery man avatar on blogs? You can easily replace it with your own branded custom avatars. Simply upload the image you want to use as default avatar and then add this code to your functions file.
+
+
+*/
+/*
+add_filter( 'avatar_defaults', 'wpb_new_gravatar' );
+function wpb_new_gravatar ($avatar_defaults) {
+$myavatar = 'http://projects.nakedsword.com/wp-content/uploads/2020/01/projectsite_gravatar-1.png';
+$avatar_defaults[$myavatar] = "Default Gravatar";
+return $avatar_defaults;
+}
+
+*/
+
+
+
+/*------------------------------------\
+    ADMIN NOTIFICATION
+ \------------------------------------*/
+
+
+// prevent admin notification email for new registered users or user password changes
+function conditional_mail_stop() {
+  global $phpmailer;
+  $blogname = wp_specialchars_decode(get_option('blogname'), ENT_QUOTES);
+  $subject = array(
+      sprintf(__('[%s] New User Registration'), $blogname),
+      sprintf(__('[%s] Password Lost/Changed'), $blogname)
+  );
+  if ( in_array( $phpmailer->Subject, $subject ) )
+      // empty $phpmailer class -> email cannot be send
+      $phpmailer = new PHPMailer( true );
+}
+add_action( 'phpmailer_init', 'conditional_mail_stop' );
+
+
+ /*------------------------------------\
+    ADMIN NOTIFICATION  long with ability to shut down user emails
+ \------------------------------------*/
+
+
+// DISABLE ADMIN default WordPress new user notification emails
+/*if ( ! function_exists ( 'wp_new_user_notification' ) ) :
+  function wp_new_user_notification( $user_id, $deprecated = null, $notify = '' ) {
+
+      global $wpdb, $wp_hasher;
+      $user = get_userdata( $user_id );*/
+
+      // The blogname option is escaped with esc_html on the way into the database in sanitize_option
+      // we want to reverse this for the plain text arena of emails.
+      //$blogname = wp_specialchars_decode(get_option('blogname'), ENT_QUOTES);
+
+      // Generate something random for a password reset key.
+      //$key = wp_generate_password( 20, false );
+
+      /** This action is documented in wp-login.php */
+     // do_action( 'retrieve_password_key', $user->user_login, $key );
+
+      // Now insert the key, hashed, into the DB.
+     /*if ( empty( $wp_hasher ) ) {
+          $wp_hasher = new PasswordHash( 8, true );
+      }
+      $hashed = time() . ':' . $wp_hasher->HashPassword( $key );
+      $wpdb->update( $wpdb->users, array( 'user_activation_key' => $hashed ), array( 'user_login' => $user->user_login ) );
+
+      $switched_locale = switch_to_locale( get_user_locale( $user ) );
+
+      $message = sprintf(__('Username: %s'), $user->user_login) . "\r\n\r\n";
+      $message .= __('To set your password, visit the following address:') . "\r\n\r\n";
+      $message .= '<' . network_site_url("wp-login.php?action=rp&key=$key&login=" . rawurlencode($user->user_login), 'login') . ">\r\n\r\n";
+
+      $message .= wp_login_url() . "\r\n";
+
+      wp_mail($user->user_email, sprintf(__('[%s] Your username and password info'), $blogname), $message);
+  }
+endif;*/
+
+  // DISABLE BOTH default WordPress new user notification emails
+/*if ( ! function_exists( 'wp_new_user_notification' ) ) :
+  function wp_new_user_notification( $user_id, $deprecated = null, $notify = '' ) {
+      return;
+  }
+endif;*/
+
+
+/*------------------------------------\
+Remove WP Version Number
+\------------------------------------*/
+
+// remove version from head
+remove_action('wp_head', 'wp_generator');
+
+// remove version from rss
+add_filter('the_generator', '__return_empty_string');
+
+// remove version from scripts and styles
+function shapeSpace_remove_version_scripts_styles($src) {
+	if (strpos($src, 'ver=')) {
+		$src = remove_query_arg('ver', $src);
+	}
+	return $src;
+}
+add_filter('style_loader_src', 'shapeSpace_remove_version_scripts_styles', 9999);
+add_filter('script_loader_src', 'shapeSpace_remove_version_scripts_styles', 9999);
+
+
+
+ /*------------------------------------\
+     FONTAWESOME -
+ \------------------------------------*/
+
+
+
+ //enqueues our external font awesome stylesheet
+ function enqueue_our_required_stylesheets(){
+ 	wp_enqueue_style('font-awesome', '//maxcdn.bootstrapcdn.com/font-awesome/5.4.0/css/font-awesome.min.css');
+ }
+ add_action('wp_enqueue_scripts','enqueue_our_required_stylesheets');
+
+ /* <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> */
+
+ /*------------------------------------\
+ ADD A STYLE SHEET FOR THE LOGIN PAGE - SEE OVERVIEW FOR CSS TAG LIST
+ \------------------------------------*/
+
+
+
+ //Replace style-login.css with the name of your custom CSS file
+ function my_custom_login_stylesheet() {
+  wp_enqueue_style( 'custom-login', get_stylesheet_directory_uri() . '/css/projectsite_login_style.css' );
+ }
+ //This loads the function above on the login page
+ add_action( 'login_enqueue_scripts', 'my_custom_login_stylesheet' );
+
+
+ /*------------------------------------*\
+       STYLE FOR JOBS SECTION
+ \*------------------------------------*/
+
+
+
+ //Replace style-login.css with the name of your custom CSS file
+/*
+function jobssection_stylesheet() {
+  wp_enqueue_style( 'custom-jobssection-stylesheet', get_stylesheet_directory_uri() . '/css/jobssection_style.css' );
+ }
+This loads the function above on the login page
+ add_action( 'wp_enqueue_scripts', 'jobssection_stylesheet' );
+*/
+
+
+function jobssection_register_more_stylesheets() {
+    wp_register_style( 'stylesheet_name', get_stylesheet_directory_uri() . '/css/jobssection_style.css' );
+}
+add_action( 'init', 'jobssection_register_more_stylesheets' );
+
+function jobssection_conditionally_enqueue_my_stylesheet() {
+    // only enqueue on product-services page slug
+    if ( is_page( 'products-services' ) ) {
+        wp_enqueue_style( 'stylesheet_name' );
+    }
+}
+add_action( 'wp_enqueue_scripts', 'jobssection_conditionally_enqueue_my_stylesheet' );
+
+
+
+
+ /*------------------------------------\
+ 	ENQUEUE CSS FOR ADMIN
+ \------------------------------------*/
+
+ // Update CSS within in Admin
+
+ /*
+
+ 	USING HOOKS TO TARGET A SPECIFIC ADMIN PAGE
+
+
+ function my_enqueue($hook) {
+     if ( 'edit.php' != $hook ) {
+         return;
+     }
+
+ wp_enqueue_script('admin-style', get_stylesheet_directory_uri().'/css/admin_style.css', false, '1.0.0' );
+ }
+ add_action('admin_enqueue_scripts', 'admin_style');
+
+ */
+ /*
+
+ function load_custom_wp_admin_style() {
+         wp_register_style( 'custom_wp_admin_css', get_template_directory_uri() . '/admin-style.css', false, '1.0.0' );
+         wp_enqueue_style( 'custom_wp_admin_css' );
+ }
+ add_action( 'admin_enqueue_scripts', 'load_custom_wp_admin_style' );
+ */
+ /* works no hook
+ function admin_style() {
+   wp_enqueue_style('admin-style', get_stylesheet_directory_uri().'/css/admin_style.css', false, '1.0.0' );
+ }
+ add_action('admin_enqueue_scripts', 'admin_style');
+ */
+ /* have to look at getting hoook to work
+ function my_enqueue($hook) {
+     if ( 'theme-editor.php' != $hook ) {
+         return;
+     }
+
+ wp_enqueue_script('admin-style', get_stylesheet_directory_uri().'/css/admin_style.css', false, '1.0.0' );
+ }
+ add_action('admin_enqueue_scripts', 'admin_style');
+ */
+
+
+
+
+ /*------------------------------------\
+ 	ENQUEUE CSS FOR ADMIN
+ \------------------------------------*/
+
+ // Update CSS within in Admin - this is the normal into same folder way - */
+
+  function admin_style() {
+   wp_enqueue_style('admin-style', get_stylesheet_directory_uri().'/css/projectsite_admin_style.css');
+ }
+ add_action('admin_enqueue_scripts', 'admin_style');
+
+
+
+ /* //// attempt to enque main shawneee style sheet to cccprojects - THIS WORKS - but is in site-fucntion-projectname - not in main fuctions file - BUT is ok for non-multisite - just can't duplicate function name //////// */
+ // Register style sheet.
+//add_action( 'admin_enqueue_scripts', 'register_custom_shawneee_admin_styles' );
+
+ /**
+  * Register style sheet.
+  */
+//function register_custom_shawneee_admin_styles() {
+     //wp_register_style( 'admin_style', 'https://shawneee.com/the/wp-content/themes/astra-child/css/admin_style.css' );
+    //wp_enqueue_style( 'admin_style' );
+ //}
+
+
+
+
+ /*------------------------------------\
+ ENQUE TYPEKIT CSS
+ \------------------------------------*/
+
+ /*
+ function custom_add_adobe_lsdeer() {
+  wp_enqueue_style( 'custom-adobe-lsdeer', 'https://use.typekit.net/lje1meq.css', false );
+  }
+  add_action( 'wp_enqueue_scripts', 'custom_add_adobe_lsdeer' );
+ */
+
+ /*------------------------------------*\
+ ENQUE GOOGLE FONTS
+ \*------------------------------------*/
+
+ /*  font-family: 'Cardo', serif;   */
+
+ /*
+ function custom_add_google_fonts_cardo() {
+  wp_enqueue_style( 'custom-google-fonts-cardo', 'https://fonts.googleapis.com/css?family=Cardo:400,400i,700&display=swap', false );
+  }
+  add_action( 'wp_enqueue_scripts', 'custom_add_google_fonts_cardo' );
+  */
+
+
+
+
+ /*----------------------\
+ Adding CUSTOM code to site via hook
+ \----------------------*/
+
+ /*
+ function storefront_credit() {
+   ?>
+
+ <div class="site-info">
+ Site Info Added
+
+    </div>
+    <?php
+  }
+ */
